@@ -15,13 +15,7 @@ class UserController extends Controller
 
     public function register(RegisterRequest $request)
     {  
-       // $validatedRequest = $request->validated();
-
-       //dd($request->all());
-
-    $validateRequest = $request->validated();  
-    dd($validateRequest);
-
+        
     }
 }
  

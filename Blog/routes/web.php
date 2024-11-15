@@ -24,6 +24,5 @@ Route::get('/', function () {
 //start
 Route::get('/register', [UserController::class, 'redirectRegister'])->name('users.redirectLogin');
 Route::post('/register', [UserController::class, 'register'])->name('users.register');
-
 //end
 

@@ -6,13 +6,27 @@
 
             @csrf
 
-            <label for="name" class="form-label">Name</label>
+            <x-form.quote/>
+            
+            <x-form.input label="Name" name="name" type="text"/>
+            
+            <x-form.input label="Email" name="email" type="text"/>
+            
+            <x-form.input label="password" name="password" type="password"/>
+            
+            <x-form.input label="Confirm Password" name="password_confirmation" type="password"/>
+            
+            <br>
+            <x-form.button label="Submit"/>
+            
+            {{-- <label for="name" class="form-label">Name</label>
             <input type="text" name="name" class="form-control">
             @error('name')
             <div class="text-danger">{{ $message }}</div>
-             @enderror
+             @enderror --}}
 
-            <label for="email" class="form-label">Email</label>
+
+             {{-- <label for="email" class="form-label">Email</label>
             <input type="email" name="email" class="form-control" >
             @error('email')
             <div class="text-danger">{{ $message }}</div>
@@ -31,7 +45,7 @@
              @enderror
 
             <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button> --}}
 
           </form>
 
