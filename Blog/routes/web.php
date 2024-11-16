@@ -26,3 +26,11 @@ Route::get('/register', [UserController::class, 'redirectRegister'])->name('user
 Route::post('/register', [UserController::class, 'register'])->name('users.register');
 //end
 
+//start
+Route::get('/experience', [UserController::class, 'redirectWorkExperience'])
+->name('users.redirect-redirectWorkExperience');
+
+Route::post('/experience', [UserController::class, 'workExperience'])
+->name('users.workExperience');
+
+//end

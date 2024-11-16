@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <h1 class="text-center"> WELCOME DASHBOARD </h1>
 
-        {{ auth()->user()->email }}
+        {{-- {{ auth()->user()->email }} --}}
     </div>
 
     <x-slot:footer>FOOTER</x-slot:footer>
