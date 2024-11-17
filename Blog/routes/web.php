@@ -22,8 +22,11 @@ Route::get('/', function () {
 
  
 //start
-Route::get('/register', [UserController::class, 'redirectRegister'])->name('users.redirectLogin');
-Route::post('/register', [UserController::class, 'register'])->name('users.register');
+Route::get('/register', [UserController::class, 'redirectRegister'])
+->name('users.redirectLogin');
+
+Route::post('/register', [UserController::class, 'register'])
+->name('users.register');
 //end
 
 //start
@@ -31,6 +34,11 @@ Route::get('/experience', [UserController::class, 'redirectWorkExperience'])
 ->name('users.redirect-redirectWorkExperience');
 
 Route::post('/experience', [UserController::class, 'workExperience'])
-->name('users.workExperience');
-
+->name('users.workExperience'); 
 //end
+
+Route::get('/login',[UserController::class, 'redirectLogin'])
+->name('users.redirectLogin');
+
+Route::post('/login', [UserController::class, 'login'])
+->name('users.login');

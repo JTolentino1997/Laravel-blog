@@ -5,9 +5,7 @@ namespace App\Http\Requests\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-use function Laravel\Prompts\password;
-
-class RegisterRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -51,8 +49,4 @@ class RegisterRequest extends FormRequest
             ]
         ];
     }
- 
 }
-
-
-// !Admin123

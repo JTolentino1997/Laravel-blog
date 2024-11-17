@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
+use App\Rules\LogInRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class WorkExperienceRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +23,14 @@ class WorkExperienceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company' =>'required|string|max:255',
-            'dateStart' =>'required|string|before:dateEnd|max:255', 
-            'dateEnd' => 'nullable|date|after:dateStart',
-            'role' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'string',
+                new LogInRule
+            ],
+            'password' => [
+                'required'
+            ]
         ];
     }
 }
