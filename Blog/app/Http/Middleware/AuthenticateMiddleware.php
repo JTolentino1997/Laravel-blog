@@ -16,15 +16,19 @@ class AuthenticateMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
-
+          
         if(Auth::check())
         {
             return $next($request);
         }
         else
         {
-            return redirect()->route('Welcome');
+            return redirect()->route('users.login');
         }
     }
+
+    // protected function redirectTo(Request $request): ?string
+    // {
+    //     return $request->expectsJson() ? null : route('login');
+    // }
 }

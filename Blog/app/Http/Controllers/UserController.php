@@ -21,15 +21,21 @@ class UserController extends Controller
         $validatedRequest = $request->validated();
         $user = User::create($validatedRequest);
         
+
+        Auth::login($user);
         
-         dd($validatedRequest);
+         //dd($validatedRequest);
         // $reg = User::create([
         //     'name' => 'JM',
         //     'email' => 'jm@email.com',
         //     'password' => 'Admin!'
         // ]); 
+        return redirect()->route('dashboard')
+                         ->with('success', 'You have successfully  added new user!');
  
       //  return redirect()->route('users.workExperience');
+    //   return redirect()->route('dashboard');
+    //   return view('dashboard');
     }
 
     public function redirectWorkExperience()
@@ -70,8 +76,51 @@ class UserController extends Controller
         ->first();
 
         Auth::login($user);
+        
+        return redirect()->route('dashboard');
+    }
 
-        return "<h1>welcome your logged</h1>";
+    public function logout()
+    {
+        Auth::logout(); 
+        return redirect()->route('users.login');
+    }
+
+    public function showAuthUser()
+    {
+        return redirect()
+        ->back()
+        ->with('success', 'Medicine deleted successfully.');
+        // return view('showAuthUser');
+    }
+
+    public function redirectUpdateRegister()
+    {
+        return view('updateRegister');
+        // return redirect()->route('updateRegister');
+    }
+
+    public function updateRegister(StoreRequest $request)
+    {
+        $validatedRequest = $request->validated();
+
+        // $id = Auth::user()->id;
+        // dd($validatedRequest);
+
+        $id = Auth::user()->id;
+        $user = User::find($id);
+
+        $user->name = $validatedRequest['name'];
+        $user->email = $validatedRequest['email'];
+
+        if($validatedRequest['password'])
+        {
+            $user->password =  $validatedRequest['password'];
+        }
+
+        $user->save();
+
+        return redirect()->route('dashboard')->with('success', 'You have successfully updated your registration!');
     }
 }
  
