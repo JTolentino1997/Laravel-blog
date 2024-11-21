@@ -6,15 +6,15 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        // return true;
-        return Auth::check();
+        // return false;
+        return Auth::check(); //return true
     }
 
     /**
@@ -28,26 +28,30 @@ class StoreRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'max:255', 
+                'max:255'
             ],
             'email' => [
                 'required',
-                'string',
                 'email',
-                'max:255',
-                // 'unique:users,email'
+                'unique:users,email,' . Auth::user()->id,
+                'max:255'
+            ],
+            'current_password' => [
+                'required_if_accepted:password', 
+                'nullable',
+                'current_password',
+                'string'
             ],
             'password' => [
-                'required',
+                'nullable',
+                'string',
                 'confirmed',
-                // 'min:8',
-                // 'max:12',
                 Password::min(8)
                 ->max(12)
                 ->mixedCase()
                 ->symbols()
                 ->numbers()
-                // ->uncompromised()
+
             ]
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class WorkExperienceRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class WorkExperienceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // return false;
+        return Auth::check();
     }
 
     /**
@@ -22,10 +24,22 @@ class WorkExperienceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company' =>'required|string|max:255',
-            'dateStart' =>'required|string|before:dateEnd|max:255', 
-            'dateEnd' => 'nullable|date|after:dateStart',
+            'company' => 'required|string|max:255',
+            'start_date' => 'required|date', // Validate as a date
+            'end_date' => 'nullable|date|after:start_date', // Already checks that start_date is before end_date
             'role' => 'required|string|max:255',
         ];
+
+        // if(request()->filled('end_date')){
+        //     // $rules['start_date'][] = 'before:end_date';
+        //     $rules['start_date'] .= '|before:end_date';
+        // }
+
+        // if ($this->filled('end_date')) {
+        //     $rules['start_date'] = ['required', 'date', 'before:end_date'];
+        // }
+
+       // return $rules;
+            
     }
 }

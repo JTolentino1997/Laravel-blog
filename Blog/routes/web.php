@@ -25,6 +25,7 @@ Route::get('/', function () {
  
 //start
 Route::get('/register', [UserController::class, 'redirectRegister'])
+->middleware(AuthenticateMiddleware::class)
 ->name('users.redirectLogin');
 
 Route::post('/register', [UserController::class, 'register'])
@@ -40,14 +41,15 @@ Route::post('/experience', [UserController::class, 'workExperience'])
 ->name('users.workExperience'); 
 //end
 
- 
+ Route::delete('experience/delete/{id}', [UserController::class, 'deleteEmployee'])
+ ->name('delete-employee');
 
 Route::get('/login',[UserController::class, 'redirectLogin'])
-->middleware(AuthenticateMiddleware::class)
 ->name('users.redirectLogin');
 
 Route::post('/login', [UserController::class, 'login'])
 ->name('users.login');
+
 
 
 Route::get('logout', [UserController::class, 'logout'])
@@ -95,3 +97,16 @@ Route::get('/registerSample', function(Request $request){
     dd($name);
 });
 
+
+Route::prefix('/users')->group(function() {
+    Route::get('{id?}', [UserController::class, 'show'])->name('users.show');
+});
+
+
+Route::get('/registerSample', [UserController::class, 'registerTest'])
+->name('users.registerTest');
+
+
+
+Route::get('/Employees', [UserController::class, 'showEmployees'])
+->name('users.showEmployees');

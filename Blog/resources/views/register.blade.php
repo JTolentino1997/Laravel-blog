@@ -1,6 +1,6 @@
 <x-layout.main>
     <x-slot:header><h1>REGISTER</h1></x-slot:header>
-
+    <h1>{{ $data ?? null }}</h1>
     <div class="container">
         <form action="{{ route('users.register') }}" method="POST">
 

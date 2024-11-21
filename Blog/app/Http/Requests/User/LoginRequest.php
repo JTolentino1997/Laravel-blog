@@ -4,6 +4,7 @@ namespace App\Http\Requests\User;
 
 use App\Rules\LogInRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LoginRequest extends FormRequest
 {
@@ -13,6 +14,7 @@ class LoginRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+        // return Auth::check();
     }
 
     /**
